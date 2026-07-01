@@ -25,5 +25,5 @@ jobs:
       - name: upload artifact
         uses: actions/upload-artifact@v7
         with:
-          name: QQDeBreathTool_MacOS_Intel.zip
+          name: QQDeBreathTool_MacOS_Intel
           path: dist/QQDeBreathTool.app
