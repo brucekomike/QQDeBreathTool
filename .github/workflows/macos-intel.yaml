@@ -23,7 +23,7 @@ jobs:
            -i debreath_icon.ico \
            debreath_tool_app.py
       - name: upload artifact
-        uses: actions/upload-artifact
+        uses: actions/upload-artifact@v7
         with:
           name: QQDeBreathTool_MacOS_Intel.zip
           path: disk/QQDeBreathTool.app
