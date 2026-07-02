@@ -28,10 +28,11 @@ jobs:
           TARGET_PATH="/Applications"
           ALIAS_DIR="dmg_structure"
           ALIAS_NAME="Applications"
-          osascript -e "tell application \"Finder\" to make new alias to POSIX file \"$TARGET_PATH\" at POSIX file \"$ALIAS_DIR\" with properties {name:\"$ALIAS_NAME\"}"
+          osascript -e 'tell application "Finder" to make new alias file at desktop to POSIX file "/Applications" with properties { name: "Applications" }'
+          mv ~/Desktop/Applications ./dmg_structure
           hdiutil create -volname "QQDeBreathTools_MacOS_intel" -srcfolder dmg_structure -ov -format UDZO QQDeBreathTools_MacOS_intel.dmg
       - name: upload artifact
         uses: actions/upload-artifact@v7
         with:
-          compress: false
+          archive: false
           path: QQDeBreathTools_MacOS_intel.dmg
