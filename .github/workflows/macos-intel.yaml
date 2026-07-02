@@ -21,8 +21,17 @@ jobs:
            --add-data "debreath_icon.ico:." \
            -i debreath_icon.ico \
            debreath_tool_app.py
+      - name: prepare dmg
+        run: |
+          mkdir dmg_structure
+          mv dist/QQDeBreathTool.app ./dmg_structure
+          TARGET_PATH="/Applications"
+          ALIAS_DIR="dmg_structure"
+          ALIAS_NAME="Applications"
+          osascript -e "tell application \"Finder\" to make new alias to POSIX file \"$TARGET_PATH\" at POSIX file \"$ALIAS_DIR\" with properties {name:\"$ALIAS_NAME\"}"
+          hdiutil create -volname "QQDeBreathTools_MacOS_intel" -srcfolder dmg_structure -ov -format UDZO QQDeBreathTools_MacOS_intel.dmg
       - name: upload artifact
         uses: actions/upload-artifact@v7
         with:
-          name: QQDeBreathTool_MacOS_Intel
-          path: dist/QQDeBreathTool.app
+          compress: false
+          path: QQDeBreathTools_MacOS_intel.dmg
